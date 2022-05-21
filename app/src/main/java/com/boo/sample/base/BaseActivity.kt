@@ -17,7 +17,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     protected open val viewModel: BaseViewModel? = null
 
     val compositeDisposable = CompositeDisposable()
-    //private val progress: DefaultProgress by lazy { DefaultProgress(this) }
+    private val progress: DefaultProgress by lazy { DefaultProgress(this) }
 
     protected open val requireLandscape: Boolean = false
 
