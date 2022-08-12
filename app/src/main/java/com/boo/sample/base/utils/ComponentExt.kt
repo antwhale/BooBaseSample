@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.widget.Toast
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,5 +44,9 @@ object ComponentExt {
                 .also {
                     startActivity(it)
                 }
+    }
+
+    fun showToast(context: Context, msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

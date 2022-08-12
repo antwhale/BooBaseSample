@@ -3,6 +3,7 @@ package com.boo.sample.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.boo.sample.repository.CommonRepository
 import com.boo.sample.repository.preference.PreferenceRepository
 import dagger.hilt.android.AndroidEntryPoint

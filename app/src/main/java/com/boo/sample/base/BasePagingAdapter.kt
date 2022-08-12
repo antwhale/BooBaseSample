@@ -2,35 +2,30 @@ package com.boo.sample.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil.inflate
 import androidx.databinding.ViewDataBinding
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import kotlin.concurrent.thread
+import com.boo.sample.main.databinding.DefaultProgressBinding.inflate
 
-abstract class BaseListAdapter<Item, V : ViewDataBinding>(
+abstract class BasePagingAdapter<Item : Any, V: ViewDataBinding>(
     diffUtil: DiffUtil.ItemCallback<Item>
-) : ListAdapter<Item, BaseRecyclerViewHolder<V>>(diffUtil) {
+) : PagingDataAdapter<Item, BaseRecyclerViewHolder<V>>(diffUtil) {
     protected val TAG = this::class.java.simpleName
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecyclerViewHolder<V> {
-        val binding = createBinding(LayoutInflater.from(parent.context), parent, viewType)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = createBinding(inflater, parent, viewType)
         return BaseRecyclerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BaseRecyclerViewHolder<V>, position: Int) {
-        onBind(holder.binding, getItem(position), position)
+        getItem(position)?.let { bind(holder.binding, it, position) }
         holder.binding.root.setOnClickListener { clickItem(holder.binding, position) }
         holder.binding.executePendingBindings()
     }
 
-    override fun submitList(list: MutableList<Item>?) {
-        /*thread (start = true){
-            super.submitList(list?.let { ArrayList(it) })
-        }*/
-        super.submitList(list?.let { ArrayList(it) })
-    }
-
     abstract fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): V
-    abstract fun onBind(binding: V, item: Item, position: Int)
+    abstract fun bind(binding: V, item: Item, position: Int)
     open fun clickItem(binding: V, position: Int) {}
 }
