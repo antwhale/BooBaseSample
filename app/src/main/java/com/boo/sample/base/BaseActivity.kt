@@ -5,16 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
-    /*@Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory*/
 
-    protected val TAG = this::class.java
     protected lateinit var binding: V
-    protected open val viewModel: BaseViewModel? = null
 
     val compositeDisposable = CompositeDisposable()
     private val progress: DefaultProgress by lazy { DefaultProgress(this) }

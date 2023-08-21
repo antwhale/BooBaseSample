@@ -21,6 +21,9 @@ class Config {
     @SerializedName("WRITE_TIME_OUT")
     val writeTimeOut = 10_000L
 
+    @SerializedName("CONNECT_TIME_OUT")
+    val connectTimeOut = 10_000L
+
     companion object {
         lateinit var INSTANCE: Config
 

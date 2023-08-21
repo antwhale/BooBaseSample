@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.core.content.edit
 import javax.inject.Inject
 
-class PreferenceManager @Inject constructor(application: Application){
+class PreferenceManager @Inject constructor(application: Application) {
     private val pref: SharedPreferences
 
     init {
@@ -16,7 +16,7 @@ class PreferenceManager @Inject constructor(application: Application){
     }
 
     @JvmOverloads
-    fun put(key: String, value: Any, isCommitSync: Boolean = DEFAULT_COMMIT_SYNC){
+    fun put(key: String, value: Any, isCommitSync: Boolean = DEFAULT_COMMIT_SYNC) {
         Log.d(TAG, "put, key = $key, value = $value")
         //commit() 동기적으로 메모리에 쓰는 행위라 기본스레드에서 쓰는 것 지양!!
         pref.edit(isCommitSync){
@@ -24,7 +24,7 @@ class PreferenceManager @Inject constructor(application: Application){
         }
     }
 
-    private fun putWithTypeCheck(editor: SharedPreferences.Editor, key: String, value: Any){
+    private fun putWithTypeCheck(editor: SharedPreferences.Editor, key: String, value: Any) {
         when(value){
             is CharSequence, Char, String, Double -> editor.putString(key, value.toString())
             is Boolean -> editor.putBoolean(key, value)
@@ -70,8 +70,6 @@ class PreferenceManager @Inject constructor(application: Application){
     fun remove(key: String) = pref.edit { this.remove(key).commit() }
 
     fun clear() = pref.edit{ this.clear().commit()}
-
-
 
     companion object {
         private val TAG = PreferenceManager::class.java.simpleName
