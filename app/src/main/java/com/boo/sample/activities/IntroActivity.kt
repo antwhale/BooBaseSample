@@ -3,6 +3,7 @@ package com.boo.sample.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.boo.sample.base.BaseActivity

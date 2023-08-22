@@ -21,6 +21,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
     }
 }
