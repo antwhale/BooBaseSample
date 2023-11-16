@@ -16,6 +16,6 @@ abstract class BaseDialog<V : ViewDataBinding>(
 
     override fun setContentView(layoutResID: Int) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutResID, null, false)
-        super.setContentView(layoutResID)
+        super.setContentView(binding.root)
     }
 }

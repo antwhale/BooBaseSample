@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.provider.Settings
+import android.view.View
 import org.greenrobot.eventbus.EventBus
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
@@ -50,4 +51,30 @@ object CommonExt {
     fun Boolean?.toInt(): Int =
             if (this == true) 1
             else 0
+}
+
+class OneClickListener(private val oneClick: (View) -> Unit) : View.OnClickListener {
+    companion object {
+        const val CLICK_INTERVAL = 500
+    }
+
+    private var lastClickedTime: Long = 0L
+
+    private fun isSafe() : Boolean {
+        return System.currentTimeMillis() - lastClickedTime > CLICK_INTERVAL
+    }
+
+    override fun onClick(view: View?) {
+        if(isSafe() && view != null) {
+            oneClick(view)
+        }
+        lastClickedTime = System.currentTimeMillis()
+    }
+}
+
+fun View.setOneClickListener(oneClick: (view: View) -> Unit) {
+
+    setOnClickListener(OneClickListener {
+        oneClick(it)
+    })
 }

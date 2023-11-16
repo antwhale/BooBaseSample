@@ -14,7 +14,6 @@ import io.reactivex.disposables.Disposable
 abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
     protected val TAG = this::class.java.simpleName
     protected lateinit var binding: V
-    protected open val viewModel: BaseViewModel? = null
 
     private val compositeDisposable = CompositeDisposable()
     private val progress: DefaultProgress by lazy { DefaultProgress(requireContext()) }
@@ -31,11 +30,11 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel?.isLoading?.observe(viewLifecycleOwner) { showProgress(it) }
-        viewModel?.alert?.observe(viewLifecycleOwner) { showAlert(it) }
+        //        viewModel?.isLoading?.observe(viewLifecycleOwner) { showProgress(it) }
+        //        viewModel?.alert?.observe(viewLifecycleOwner) { showAlert(it) }
     }
 
     override fun onDestroy() {
